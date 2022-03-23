@@ -11,8 +11,10 @@
       <TextField fx:id="folderPath" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="631.0" />
       <TableView fx:id="table" layoutX="14.0" layoutY="49.0" prefHeight="300.0" prefWidth="672.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="colChanell" prefWidth="100.0" text="Chanell" />
+          <TableColumn fx:id="colProgram" prefWidth="372.0" text="Program" />
+            <TableColumn fx:id="colDate" prefWidth="100.0" text="Date" />
+            <TableColumn fx:id="colSize" prefWidth="100.0" text="Size" />
         </columns>
       </TableView>
       <Button fx:id="readMovies" layoutX="583.0" layoutY="361.0" mnemonicParsing="false" onAction="#readMoviesClick" text="Read movies" />
