@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,22 @@ public class MainController {
 		DirectoryChooser dc = new DirectoryChooser();
 		File selectedFolder = dc.showDialog(null);
 		folderPath.setText(selectedFolder.getPath());
+	}
+	
+	public void readMoviesClick(ActionEvent event) {
+		Tools tools = new Tools();
+		InfoFile[] files;
+		File folder;
 		
+		try {
+			folder = tools.open(folderPath.getText());
+			files = tools.read(folder);
+			
+			for (InfoFile movie : files) {
+				System.out.println(movie.program + ";" + movie.beginDate + ";" + movie.channel + ";" + movie.size(2) + "Mb");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
