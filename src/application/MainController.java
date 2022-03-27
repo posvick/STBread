@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -66,7 +67,7 @@ public class MainController implements Initializable {
         colProgram.setCellValueFactory(new PropertyValueFactory<>("Program"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
         colSize.setCellValueFactory(new PropertyValueFactory<>("Size"));
-
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         table.setItems(moviesModels);
 	}
 }
