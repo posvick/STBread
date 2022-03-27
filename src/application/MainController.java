@@ -56,7 +56,7 @@ public class MainController implements Initializable {
 			files = tools.read(folder);
 			
 			for (InfoFile movie : files) {
-				moviesModels.add(new MoviesModel(movie.channel, movie.program, movie.beginDate, movie.size(2)));
+				moviesModels.add(new MoviesModel(movie.channel, movie.program, movie.beginDate, movie.size(2), movie.filename));
 			}
 			printSelected.setDisable(false);
 		} catch (FileNotFoundException e) {
@@ -67,7 +67,7 @@ public class MainController implements Initializable {
 	public void printSelectedClick(ActionEvent event) {
 		ObservableList<MoviesModel> selected = table.getSelectionModel().getSelectedItems();
 		for (MoviesModel movie : selected) {
-			System.out.println(movie.getProgram());
+			System.out.println(movie.getFilename());
 		}
 	}
 
