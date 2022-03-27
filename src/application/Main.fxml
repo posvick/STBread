@@ -18,6 +18,6 @@
         </columns>
       </TableView>
       <Button fx:id="readMovies" layoutX="583.0" layoutY="361.0" mnemonicParsing="false" onAction="#readMoviesClick" text="Read movies" />
-      <Button fx:id="printSelected" disable="true" layoutX="461.0" layoutY="361.0" mnemonicParsing="false" onAction="#printSelectedClick" text="Print selected" />
+      <Button fx:id="deleteSelected" disable="true" layoutX="461.0" layoutY="361.0" mnemonicParsing="false" onAction="#deleteSelectedClick" text="Delete selected" />
    </children>
 </AnchorPane>

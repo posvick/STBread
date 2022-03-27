@@ -2,7 +2,10 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -13,10 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.DirectoryChooser;
-import javafx.scene.control.TableView;
 
 public class MainController implements Initializable {
 	@FXML
@@ -36,7 +39,7 @@ public class MainController implements Initializable {
 	@FXML
 	private Button readMovies;
 	@FXML
-	private Button printSelected;
+	private Button deleteSelected;
 	
 	private ObservableList<MoviesModel> moviesModels = FXCollections.observableArrayList();
 
@@ -58,16 +61,23 @@ public class MainController implements Initializable {
 			for (InfoFile movie : files) {
 				moviesModels.add(new MoviesModel(movie.channel, movie.program, movie.beginDate, movie.size(2), movie.filename));
 			}
-			printSelected.setDisable(false);
+			deleteSelected.setDisable(false);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void printSelectedClick(ActionEvent event) {
+	public void deleteSelectedClick(ActionEvent event) throws IOException {
 		ObservableList<MoviesModel> selected = table.getSelectionModel().getSelectedItems();
 		for (MoviesModel movie : selected) {
-			System.out.println(movie.getFilename());
+			File dir = new File(folderPath.getText());
+			File[] files = dir.listFiles((d, name) -> name.startsWith(movie.getFilename()));
+		
+			for (File data : files) {
+				Files.deleteIfExists(data.toPath());
+			}
+			
+			moviesModels.remove(movie);
 		}
 	}
 
