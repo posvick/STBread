@@ -35,6 +35,8 @@ public class MainController implements Initializable {
 	private TableColumn<MoviesModel, Long> colSize;
 	@FXML
 	private Button readMovies;
+	@FXML
+	private Button printSelected;
 	
 	private ObservableList<MoviesModel> moviesModels = FXCollections.observableArrayList();
 
@@ -56,8 +58,16 @@ public class MainController implements Initializable {
 			for (InfoFile movie : files) {
 				moviesModels.add(new MoviesModel(movie.channel, movie.program, movie.beginDate, movie.size(2)));
 			}
+			printSelected.setDisable(false);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void printSelectedClick(ActionEvent event) {
+		ObservableList<MoviesModel> selected = table.getSelectionModel().getSelectedItems();
+		for (MoviesModel movie : selected) {
+			System.out.println(movie.getProgram());
 		}
 	}
 
