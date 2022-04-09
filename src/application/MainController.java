@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -40,6 +42,12 @@ public class MainController implements Initializable {
 	private Button readMovies;
 	@FXML
 	private Button deleteSelected;
+	@FXML
+	private ProgressBar diskSize;
+	@FXML
+	private Label freeSpace;
+	@FXML
+	private Label totalSpace;
 	
 	private ObservableList<MoviesModel> moviesModels = FXCollections.observableArrayList();
 
@@ -65,9 +73,15 @@ public class MainController implements Initializable {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		double percent = (1-tools.getFreeSize(folderPath.getText())/tools.getDiskSize(folderPath.getText()));
+		freeSpace.setText(Double.toString(tools.getFreeSize(folderPath.getText())));
+		totalSpace.setText(Double.toString(tools.getDiskSize(folderPath.getText())));
+		diskSize.setProgress(percent);
 	}
 	
 	public void deleteSelectedClick(ActionEvent event) throws IOException {
+		Tools tools = new Tools();
 		ObservableList<MoviesModel> selected = table.getSelectionModel().getSelectedItems();
 		for (MoviesModel movie : selected) {
 			File dir = new File(folderPath.getText());
@@ -79,6 +93,7 @@ public class MainController implements Initializable {
 			
 			moviesModels.remove(movie);
 		}
+		freeSpace.setText(Double.toString(tools.getFreeSize(folderPath.getText())));
 	}
 
 	@Override

@@ -70,4 +70,12 @@ public class Tools {
 		
 		return lt.format(formatter);
 	}
+
+	public double getDiskSize(String string) {
+		return new File(string).getTotalSpace()/1024/1024/1024;
+	}
+
+	public double getFreeSize(String string) {
+		return new File(string).getUsableSpace()/1024/1024/1024;
+	}
 }

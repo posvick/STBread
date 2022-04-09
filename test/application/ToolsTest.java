@@ -157,4 +157,18 @@ class ToolsTest {
 			fail();
 		}
 	}
+	
+	@Test
+	void CheckDiskSize() {
+		Tools tools = new Tools();
+		double size = tools.getDiskSize("/home/alden/");
+		assertEquals(758, size);
+	}
+	
+	@Test
+	void CheckFreeDiskSize() {
+		Tools tools = new Tools();
+		double size = tools.getFreeSize("/home/alden/");
+		assertEquals(21, size);
+	}
 }
