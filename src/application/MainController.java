@@ -45,9 +45,7 @@ public class MainController implements Initializable {
 	@FXML
 	private ProgressBar diskSize;
 	@FXML
-	private Label freeSpace;
-	@FXML
-	private Label totalSpace;
+	private Label usedSpace;
 	
 	private ObservableList<MoviesModel> moviesModels = FXCollections.observableArrayList();
 
@@ -75,8 +73,8 @@ public class MainController implements Initializable {
 		}
 		
 		double percent = (1-tools.getFreeSize(folderPath.getText())/tools.getDiskSize(folderPath.getText()));
-		freeSpace.setText(Double.toString(tools.getFreeSize(folderPath.getText())));
-		totalSpace.setText(Double.toString(tools.getDiskSize(folderPath.getText())));
+		String value = String.format("%5d/%5d GB", tools.getDiskSize(folderPath.getText())-tools.getFreeSize(folderPath.getText()), tools.getDiskSize(folderPath.getText()));
+		usedSpace.setText(value);
 		diskSize.setProgress(percent);
 	}
 	
@@ -93,7 +91,8 @@ public class MainController implements Initializable {
 			
 			moviesModels.remove(movie);
 		}
-		freeSpace.setText(Double.toString(tools.getFreeSize(folderPath.getText())));
+		String value = String.format("%5d/%5d GB", tools.getDiskSize(folderPath.getText())-tools.getFreeSize(folderPath.getText()), tools.getDiskSize(folderPath.getText()));
+		usedSpace.setText(value);
 	}
 
 	@Override

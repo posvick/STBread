@@ -71,11 +71,14 @@ public class Tools {
 		return lt.format(formatter);
 	}
 
-	public double getDiskSize(String string) {
-		return new File(string).getTotalSpace()/1024/1024/1024;
+	public long getDiskSize(String string) {
+		long size = new File(string).getTotalSpace();
+		long toGb = size/1024/1024/1024;
+		return toGb;
+		
 	}
 
-	public double getFreeSize(String string) {
+	public long getFreeSize(String string) {
 		return new File(string).getUsableSpace()/1024/1024/1024;
 	}
 }

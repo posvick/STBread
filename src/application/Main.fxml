@@ -20,8 +20,6 @@
       <Button fx:id="readMovies" layoutX="583.0" layoutY="361.0" mnemonicParsing="false" onAction="#readMoviesClick" text="Read movies" />
       <Button fx:id="deleteSelected" disable="true" layoutX="461.0" layoutY="361.0" mnemonicParsing="false" onAction="#deleteSelectedClick" text="Delete selected" />
       <ProgressBar fx:id="diskSize" layoutX="14.0" layoutY="397.0" prefHeight="20.0" prefWidth="569.0" progress="0.0" />
-      <Label fx:id="freeSpace" layoutX="592.0" layoutY="400.0" prefHeight="15.0" prefWidth="36.0" text="0" textAlignment="RIGHT" />
-      <Label fx:id="totalSpace" layoutX="640.0" layoutY="400.0" prefHeight="15.0" prefWidth="49.0" text="0" textAlignment="RIGHT" />
-      <Label layoutX="632.0" layoutY="400.0" prefHeight="15.0" prefWidth="0.0" text="/" />
+      <Label fx:id="usedSpace" layoutX="586.0" layoutY="400.0" prefHeight="15.0" prefWidth="103.0" text="0" textAlignment="RIGHT" />
    </children>
 </AnchorPane>
