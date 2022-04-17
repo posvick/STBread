@@ -109,6 +109,14 @@ public class MainController implements Initializable {
 		File selectedFolder = dc.showDialog(null);
 		targetFolderPath.setText(selectedFolder.getPath());
 	}
+	
+	public void moveCopySwitchClick(ActionEvent event) {
+		if (moveCopySwitch.isSelected()) {
+			copySelected.setText("Move selected");
+		} else {
+			copySelected.setText("Copy selected");
+		}
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
