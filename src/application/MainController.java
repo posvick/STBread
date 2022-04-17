@@ -129,7 +129,10 @@ public class MainController implements Initializable {
 		
 			for (File data : files) {
 				Path source = Paths.get(data.getAbsolutePath());
-				Path destination = Paths.get(targetFolderPath.getText()+"/"+data.getName());
+				File newFolder = new File(targetFolderPath.getText()+"/"+movie.getChanell().replace("/", "|")+" - "+movie.getProgram().replace("/", "|")+" ["+movie.getDate()+"]");
+				if (!newFolder.exists())
+					newFolder.mkdirs();
+				Path destination = Paths.get(newFolder.getAbsolutePath()+"/"+data.getName());
 				
 				if (moveCopySwitch.isSelected()) {
 					Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);
