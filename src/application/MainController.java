@@ -72,7 +72,7 @@ public class MainController implements Initializable {
 			e.printStackTrace();
 		}
 		
-		double percent = (1-tools.getFreeSize(folderPath.getText())/tools.getDiskSize(folderPath.getText()));
+		double percent = (double)(tools.getDiskSize(folderPath.getText())-tools.getFreeSize(folderPath.getText()))/tools.getDiskSize(folderPath.getText());
 		String value = String.format("%5d/%5d GB", tools.getDiskSize(folderPath.getText())-tools.getFreeSize(folderPath.getText()), tools.getDiskSize(folderPath.getText()));
 		usedSpace.setText(value);
 		diskSize.setProgress(percent);
