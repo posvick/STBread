@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -116,6 +119,30 @@ public class MainController implements Initializable {
 		} else {
 			copySelected.setText("Copy selected");
 		}
+	}
+	
+	public void copySelectedClick(ActionEvent event) throws IOException {
+		Tools tools = new Tools();
+		ObservableList<MoviesModel> selected = table.getSelectionModel().getSelectedItems();
+		for (MoviesModel movie : selected) {
+			File dir = new File(folderPath.getText());
+			File[] files = dir.listFiles((d, name) -> name.startsWith(movie.getFilename()));
+		
+			for (File data : files) {
+				Path source = Paths.get(data.getAbsolutePath());
+				Path destination = Paths.get(targetFolderPath.getText()+"/"+data.getName());
+				
+				if (moveCopySwitch.isSelected()) {
+					Files.move(source, destination, StandardCopyOption.REPLACE_EXISTING);
+				} else {
+					Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+				}
+			}
+		}
+		moviesModels.removeAll(table.getSelectionModel().getSelectedItems());
+
+		String value = String.format("%5d/%5d GB", tools.getDiskSize(folderPath.getText())-tools.getFreeSize(folderPath.getText()), tools.getDiskSize(folderPath.getText()));
+		usedSpace.setText(value);
 	}
 
 	@Override
