@@ -88,9 +88,8 @@ public class MainController implements Initializable {
 			for (File data : files) {
 				Files.deleteIfExists(data.toPath());
 			}
-			
-			moviesModels.remove(movie);
 		}
+		moviesModels.removeAll(selected);
 		String value = String.format("%5d/%5d GB", tools.getDiskSize(folderPath.getText())-tools.getFreeSize(folderPath.getText()), tools.getDiskSize(folderPath.getText()));
 		usedSpace.setText(value);
 	}
